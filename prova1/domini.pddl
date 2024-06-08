@@ -2,14 +2,9 @@
 	(:requirements :adl :typing)
 	(:types exercici)
 
-	(:functions
-        (nivell ?E - exercici) ;; El nivell de l'exercici E
-		(objectiu ?E - exercici) ;; L'objectiu de l'exercici E
-    )
-
 	(:predicates
 		(preparador ?X - exercici ?Y - exercici) ;; X és preparador de Y
-		(fet ?E - exercici) ;; E s'ha fet al nivell N
+		(fet ?E - exercici)
 	)
 
 	(:action fer
@@ -21,9 +16,6 @@
 				(fet ?P))
 			)
 		)
-		:effect (and
-		(fet ?E)
-		(increase (nivell ?E) 1)
-		)
+		:effect (fet ?E)
 	)
 )
