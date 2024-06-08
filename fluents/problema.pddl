@@ -1,18 +1,27 @@
 (define (problem problema1)
     (:domain domini)
     (:objects
-        e1 e2 e3 - exercici
+        e1 - exercici
+        e2 - exercici
+        e3 - exercici
     )
     (:init
         (preparador e1 e2)
         (preparador e2 e3)
+        (= (nivell e1) 1)
+        (= (nivell e2) 2)
+        (= (nivell e3) 3)
         (fet e1)
+        (= (objectiu e1) 1)
+        (= (objectiu e2) 3)
+        (= (objectiu e3) 5)
     )
     (:goal
-        (and
-            (fet e1)
-            (fet e2)
-            (fet e3)
+        (forall (?E - exercici)
+            (imply
+                (>= (nivell ?E) (objectiu ?E))
+                (fet ?E)
+            )
         )
     )
 )
