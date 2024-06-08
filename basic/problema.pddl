@@ -1,9 +1,7 @@
 (define (problem problema1)
     (:domain domini)
     (:objects
-        e1 - exercici
-        e2 - exercici
-        e3 - exercici
+        e1 e2 e3 - exercici
     )
     (:init
         (preparador e1 e2)
