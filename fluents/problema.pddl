@@ -18,7 +18,7 @@
     )
     (:goal
         (forall (?E - exercici)
-            (imply
+            (and
                 (>= (nivell ?E) (objectiu ?E))
                 (fet ?E)
             )
