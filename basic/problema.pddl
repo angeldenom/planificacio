@@ -1,7 +1,7 @@
 (define (problem problema1)
     (:domain domini)
     (:objects
-        e1 e2 e3 - exercici
+        e1 e2 e3 e4 - exercici
         d1 d2 d3 d4 d5 d6 d7 d8 d9 d10 d11 d12 d13 d14 d15 - dia
         n1 n2 n3 n4 n5 n6 n7 n8 n9 n10 - nivell
     )
@@ -36,11 +36,14 @@
         (= (nivell-actual e1) 1)
         (= (nivell-actual e2) 1)
         (= (nivell-actual e3) 1)
+        (= (nivell-actual e4) 1)
         (= (objectiu e1) 5)
         (= (objectiu e2) 3)
         (= (objectiu e3) 0)
+        (= (objectiu e4) 0)
         (= (dia-actual) 1)
         (preparador e3 e1)
+        (predecesor e4 e2)
     )
     (:goal
         (forall (?E - exercici)

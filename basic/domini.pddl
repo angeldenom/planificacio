@@ -11,8 +11,10 @@
     )
 
     (:predicates
-        (preparador ?X - exercici ?Y - exercici) ;; X és preparador de Y
         (fet ?E - exercici ?D - dia) ;; E s'ha fet el dia D
+        (preparador ?X - exercici ?Y - exercici) ;; X és preparador de Y
+        (predecesor ?X - exercici ?Y - exercici) ;; X és predecesor de Y
+        (ultim ?D - dia ?E - exercici) ;; Últim exercici fet en aquell dia
     )
 
     (:action fer
@@ -20,11 +22,18 @@
         :precondition(and
             (or
                 (not (exists (?P - exercici) (preparador ?P ?E)))
-			(exists (?P - exercici) (and 
+			    (exists (?P - exercici) (and 
                     (preparador ?P ?E)
                     (fet ?P ?D)
                 ))
-			)
+			) ;; Condició preparador
+            (or
+                (not (exists (?P - exercici) (predecesor ?P ?E)))
+                (exists (?P - exercici) (and
+                    (predecesor ?P ?E)
+                    (ultim ?D ?P)
+                ))
+            ) ;; Condició predecesor
             (not (fet ?E ?D)) ;; Un exercici només es pot fer un cop al dia
             (= (ordre-dia ?D) (dia-actual)) ;; No es pot fer un exercici abans del dia actual
             (or 
@@ -35,6 +44,12 @@
         :effect (and
 			(fet ?E ?D)
 			(assign (nivell-actual ?E) (ordre-nivell ?N))
+            (forall (?E_prev - exercici) 
+                (when (ultim ?D ?E_prev) 
+                    (not (ultim ?D ?E_prev))
+                )
+            ) ;; Eliminar ultim exercici
+            (ultim ?D ?E) ;; Actualitzar ultim exercici
         )
     )
 
